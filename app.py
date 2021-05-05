@@ -27,7 +27,7 @@ from thoth.common import __version__ as thoth_common_version
 from thoth.storages import GraphDatabase
 from thoth.storages import __version__ as thoth_storages_version
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __component_version__ = f"{__version__}+storages.{thoth_storages_version}.common.{thoth_common_version}"
 
 init_logging()
