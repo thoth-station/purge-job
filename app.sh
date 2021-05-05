@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env sh
 # A simple wrapper script to run purge-job specific commands in a Thoth
 # deployment.
 
