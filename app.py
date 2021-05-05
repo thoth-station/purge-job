@@ -73,7 +73,6 @@ def cli(ctx=None, verbose=False) -> None:
 
 
 @cli.command()
-@click.pass_context
 @click.option(
     "--os-name",
     "-o",
@@ -110,7 +109,6 @@ def solver(os_name: str, os_version: str, python_version: str) -> None:
 
 
 @cli.command()
-@click.pass_context
 @click.option(
     "--adviser-version",
     type=str,
@@ -135,7 +133,6 @@ def adviser(end: Optional[str], adviser_version: Optional[str]) -> None:
 
 
 @cli.command()
-@click.pass_context
 @click.option(
     "--package-extract-version",
     type=str,
