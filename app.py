@@ -27,6 +27,7 @@ from thoth.common import __version__ as thoth_common_version
 from thoth.storages import GraphDatabase
 from thoth.storages import __version__ as thoth_storages_version
 
+
 __version__ = "0.0.2"
 __component_version__ = f"{__version__}+storages.{thoth_storages_version}.common.{thoth_common_version}"
 
@@ -104,7 +105,7 @@ def solver(os_name: str, os_version: str, python_version: str) -> None:
     """Purge solver data."""
     graph = GraphDatabase()
     graph.connect()
-    result = graph.delete_solved(os_name=os_name, os_version=os_version, python_version=python_version)
+    result = graph.purge_solver_documents(os_name=os_name, os_version=os_version, python_version=python_version)
     _LOGGER.info("Removed %d solver entries from the database", result)
 
 
