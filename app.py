@@ -129,7 +129,9 @@ def adviser(end: Optional[str], adviser_version: Optional[str]) -> None:
     """Purge adviser data."""
     graph = GraphDatabase()
     graph.connect()
-    result = graph.delete_adviser_run(end_datetime=parse(end) if end else None, adviser_version=adviser_version or None)
+    result = graph.purge_adviser_documents(
+        end_datetime=parse(end) if end else None, adviser_version=adviser_version or None
+    )
     _LOGGER.info("Removed %d adviser entries from the database", result)
 
 
@@ -153,7 +155,7 @@ def package_extract(end: Optional[str], package_extract_version: Optional[str]) 
     """Purge package-extract data."""
     graph = GraphDatabase()
     graph.connect()
-    result = graph.delete_package_extract_run(
+    result = graph.purge_package_extract_documents(
         end_datetime=parse(end) if end else None, package_extract_version=package_extract_version or None
     )
     _LOGGER.info("Removed %d package-extract entries from the database", result)
