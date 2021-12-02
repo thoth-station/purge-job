@@ -27,6 +27,7 @@ from thoth.common import __version__ as thoth_common_version
 from thoth.storages import GraphDatabase
 from thoth.storages import __version__ as thoth_storages_version
 
+
 __version__ = "0.0.2"
 __component_version__ = f"{__version__}+storages.{thoth_storages_version}.common.{thoth_common_version}"
 
@@ -104,7 +105,7 @@ def solver(os_name: str, os_version: str, python_version: str) -> None:
     """Purge solver data."""
     graph = GraphDatabase()
     graph.connect()
-    result = graph.delete_solved(os_name=os_name, os_version=os_version, python_version=python_version)
+    result = graph.purge_solver_documents(os_name=os_name, os_version=os_version, python_version=python_version)
     _LOGGER.info("Removed %d solver entries from the database", result)
 
 
@@ -128,7 +129,9 @@ def adviser(end: Optional[str], adviser_version: Optional[str]) -> None:
     """Purge adviser data."""
     graph = GraphDatabase()
     graph.connect()
-    result = graph.delete_adviser_run(end_datetime=parse(end) if end else None, adviser_version=adviser_version or None)
+    result = graph.purge_adviser_documents(
+        end_datetime=parse(end) if end else None, adviser_version=adviser_version or None
+    )
     _LOGGER.info("Removed %d adviser entries from the database", result)
 
 
@@ -152,7 +155,7 @@ def package_extract(end: Optional[str], package_extract_version: Optional[str]) 
     """Purge package-extract data."""
     graph = GraphDatabase()
     graph.connect()
-    result = graph.delete_package_extract_run(
+    result = graph.purge_package_extract_documents(
         end_datetime=parse(end) if end else None, package_extract_version=package_extract_version or None
     )
     _LOGGER.info("Removed %d package-extract entries from the database", result)
