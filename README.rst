@@ -1,4 +1,4 @@
-Thoth's pruge job
+Thoth's purge job
 -----------------
 
 A job that purges old Thoth data in a Thoth deployment.
