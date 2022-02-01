@@ -111,9 +111,15 @@ def solver(os_name: str, os_version: str, python_version: str) -> None:
             f"No solver entries to purge were found for"
             f"--os-name: {os_name},"
             f"--os-version: {os_version},"
-            f"--python-version: {python_version}.\n"
-            "Consider selecting solver documents for available environments."
+            f"--python-version: {python_version}."
         )
+        if graph.solved_software_environment_exists(
+            os_name=os_name, os_version=os_version, python_version=python_version
+        ):
+            _LOGGER.info(
+                "Solved software environment for the specified paramaters does not exist."
+                "Consider selecting solver documents for available environments."
+            )
     _LOGGER.info("Removed %d solver entries from the database", result)
 
 
