@@ -106,6 +106,20 @@ def solver(os_name: str, os_version: str, python_version: str) -> None:
     graph = GraphDatabase()
     graph.connect()
     result = graph.purge_solver_documents(os_name=os_name, os_version=os_version, python_version=python_version)
+    if result == 0:
+        _LOGGER.error(
+            f"No solver entries to purge were found for"
+            f"--os-name: {os_name},"
+            f"--os-version: {os_version},"
+            f"--python-version: {python_version}."
+        )
+        if graph.solved_software_environment_exists(
+            os_name=os_name, os_version=os_version, python_version=python_version
+        ):
+            _LOGGER.error(
+                "Solved software environment for the specified paramaters does not exist."
+                "Consider selecting solver documents for available environments."
+            )
     _LOGGER.info("Removed %d solver entries from the database", result)
 
 
@@ -132,6 +146,13 @@ def adviser(end: Optional[str], adviser_version: Optional[str]) -> None:
     result = graph.purge_adviser_documents(
         end_datetime=parse(end) if end else None, adviser_version=adviser_version or None
     )
+    if result == 0:
+        _LOGGER.error(
+            f"No adviser entries to purge were found for"
+            f"--adviser-version: {adviser_version},"
+            f"--end-datetime: {end}.\n"
+            "Consider selecting adviser documents for available adviser versions and datetimes."
+        )
     _LOGGER.info("Removed %d adviser entries from the database", result)
 
 
@@ -158,6 +179,13 @@ def package_extract(end: Optional[str], package_extract_version: Optional[str]) 
     result = graph.purge_package_extract_documents(
         end_datetime=parse(end) if end else None, package_extract_version=package_extract_version or None
     )
+    if result == 0:
+        _LOGGER.error(
+            f"No package-extract entries to purge were found for"
+            f"--package-extract-version: {package_extract_version},"
+            f"--end-datetime: {end}.\n"
+            "Consider selecting package-extract documents for available package-extract versions and datetimes."
+        )
     _LOGGER.info("Removed %d package-extract entries from the database", result)
 
 
