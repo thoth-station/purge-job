@@ -107,7 +107,7 @@ def solver(os_name: str, os_version: str, python_version: str) -> None:
     graph.connect()
     result = graph.purge_solver_documents(os_name=os_name, os_version=os_version, python_version=python_version)
     if result == 0:
-        _LOGGER.warning(
+        _LOGGER.error(
             f"No solver entries to purge were found for"
             f"--os-name: {os_name},"
             f"--os-version: {os_version},"
@@ -116,7 +116,7 @@ def solver(os_name: str, os_version: str, python_version: str) -> None:
         if graph.solved_software_environment_exists(
             os_name=os_name, os_version=os_version, python_version=python_version
         ):
-            _LOGGER.info(
+            _LOGGER.error(
                 "Solved software environment for the specified paramaters does not exist."
                 "Consider selecting solver documents for available environments."
             )
@@ -147,7 +147,7 @@ def adviser(end: Optional[str], adviser_version: Optional[str]) -> None:
         end_datetime=parse(end) if end else None, adviser_version=adviser_version or None
     )
     if result == 0:
-        _LOGGER.warning(
+        _LOGGER.error(
             f"No adviser entries to purge were found for"
             f"--adviser-version: {adviser_version},"
             f"--end-datetime: {end}.\n"
@@ -180,7 +180,7 @@ def package_extract(end: Optional[str], package_extract_version: Optional[str]) 
         end_datetime=parse(end) if end else None, package_extract_version=package_extract_version or None
     )
     if result == 0:
-        _LOGGER.warning(
+        _LOGGER.error(
             f"No package-extract entries to purge were found for"
             f"--package-extract-version: {package_extract_version},"
             f"--end-datetime: {end}.\n"
